@@ -1,0 +1,13 @@
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/">AstroPrediction</a>
+        <a class="navbar-brand" href="/register">Register</a>
+        <a class="navbar-brand" href="/login">Login</a>
+        <a class="navbar-brand" href="/contact">Contact Us</a>
+        {% if user.is_authenticated %}
+<!--        <p>Hello, {{user.username }}-->
+<!--        <a href="/" style="color :white">Logout</a>  &lt;!&ndash; style="..." then it is invisible until we select &ndash;&gt;-->
+        </p>
+        {% endif %}
+    </div>
+</nav>
