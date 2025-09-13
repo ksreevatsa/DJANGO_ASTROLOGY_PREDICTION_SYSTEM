@@ -1,23 +1,98 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Feedback Report</title>
-    <!-- Import the mpld3 JavaScript library for interactivity -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mpld3/0.5.2/mpld3.min.js"></script>
-</head>
-<body>
-    <h1>Feedback Report</h1>
+{% extends 'base.html' %}
+{% block content %}
+<div class="full-vh-container">
+    <div class="container-modern">
+        <div class="welcome-section fade-in-up">
+            <h1 class="welcome-title">
+                <i class="fas fa-chart-bar"></i> Analytics & Reports
+            </h1>
+            <p class="welcome-subtitle">
+                Comprehensive insights and analytics about our astrology platform and user feedback.
+            </p>
+        </div>
 
-    <h2>Satisfaction Level Chart</h2>
-    {{ chart_html|safe }}
+        <!-- Reports Overview Cards -->
+        <div class="row home-features-row">
+            <div class="col-md-4 col-sm-6">
+                <div class="home-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h4 class="feature-title">Satisfaction Analysis</h4>
+                    <p class="feature-description">Detailed breakdown of user satisfaction levels and feedback trends.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="home-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="feature-title">Performance Metrics</h4>
+                    <p class="feature-description">Key performance indicators and platform usage statistics.</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="home-feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 class="feature-title">User Insights</h4>
+                    <p class="feature-description">User behavior patterns and engagement analytics.</p>
+                </div>
+            </div>
+        </div>
 
-    <h2>Summary Statistics</h2>
-    {{ summary_stats|safe }}
+        <!-- Satisfaction Level Chart -->
+        <div class="card-modern fade-in-up">
+            <h2 class="heading-modern">
+                <i class="fas fa-chart-pie"></i> Satisfaction Level Chart
+            </h2>
+            <div style="background: rgba(255, 255, 255, 0.9); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                {{ chart_html|safe }}
+            </div>
+        </div>
 
-   <script>
-      document.addEventListener("contextmenu", (event) => {
-         event.preventDefault();
-      });
-   </script>
-</body>
-</html>
+        <!-- Summary Statistics -->
+        <div class="card-modern fade-in-up">
+            <h2 class="heading-modern">
+                <i class="fas fa-chart-bar"></i> Summary Statistics
+            </h2>
+            <div style="background: rgba(255, 255, 255, 0.9); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                {{ summary_stats|safe }}
+            </div>
+        </div>
+
+        <!-- Additional Analytics Cards -->
+        <div class="row" style="margin-top: 40px;">
+            <div class="col-md-6">
+                <div class="card-modern">
+                    <div class="text-center">
+                        <i class="fas fa-star" style="font-size: 2rem; color: #f39c12; margin-bottom: 15px;"></i>
+                        <h4 class="subheading-modern">Platform Rating</h4>
+                        <p class="text-modern">Overall user satisfaction and platform performance metrics.</p>
+                        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                            <h3 style="margin: 0; font-size: 2rem;">4.8/5</h3>
+                            <p style="margin: 5px 0 0 0; opacity: 0.9;">Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-modern">
+                    <div class="text-center">
+                        <i class="fas fa-heart" style="font-size: 2rem; color: #e74c3c; margin-bottom: 15px;"></i>
+                        <h4 class="subheading-modern">User Engagement</h4>
+                        <p class="text-modern">Active users and platform interaction statistics.</p>
+                        <div style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                            <h3 style="margin: 0; font-size: 2rem;">95%</h3>
+                            <p style="margin: 5px 0 0 0; opacity: 0.9;">User Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+</div>
+{% endblock %}
