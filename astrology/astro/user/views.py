@@ -59,7 +59,8 @@ def feedback_form(request):
 
 
 def userhome_render(request):
-    return render(request,"userhome.html")
+    uname=request.session["user_name"]
+    return render(request,"userhome.html",{"uname":uname})
 
 def checksign(request):
     return render(request,"checksign.html")

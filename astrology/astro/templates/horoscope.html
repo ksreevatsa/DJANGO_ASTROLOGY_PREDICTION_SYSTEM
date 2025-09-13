@@ -1,221 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-    	<meta charset="utf-8">
-    	<meta name="description" content="This is where your description goes">
-    	<meta name="keywords" content="one, two, three">
+<head>
+    <meta charset="UTF-8">
+    <title>Horoscope - AstroPrediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% load static %}{% static 'afterlogin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar-afterlogin">
+        <ul>
+            <li><a href="{% url 'userhome' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'checksign' %}"><i class="fas fa-star"></i> Check Sign</a></li>
+            <li><a href="{% url 'horoscope' %}"><i class="fas fa-moon"></i> Horoscope</a></li>
+            <li><a href="{% url 'userchangepwd' %}"><i class="fas fa-lock"></i> Change Password</a></li>
+            <li><a href="{% url 'feedback' %}"><i class="fas fa-comment"></i> Feedback</a></li>
+            <li><a href="{% url 'initiate_payment' %}"><i class="fas fa-heart"></i> Donate</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
 
-		<title>Horoscope</title>
+    <!-- Main Content -->
+    <div class="container-afterlogin">
+        <div class="welcome-afterlogin fade-in-up">
+            <h1 class="welcome-title">
+                <i class="fas fa-moon"></i> Horoscope Predictions
+            </h1>
+            <p class="welcome-subtitle">
+                Enter your birthday to discover your zodiac sign and get personalized predictions.
+            </p>
+        </div>
 
-		<!-- external CSS link -->
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/style.css">
+        <!-- Horoscope Form -->
+        <div class="message-card fade-in-up">
+            <h2 class="heading-afterlogin">
+                <i class="fas fa-calendar-alt"></i> Enter Your Birthday
+            </h2>
+            
+            <form method="post" action="{% url 'checkhoroscope' %}" class="form-afterlogin">
+                {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-calendar-day"></i> Day
+                            </label>
+                            <input type="number" id="day" min="1" max="31" name="date" class="form-control" 
+                                   placeholder="Enter day (1-31)" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-calendar-month"></i> Month
+                            </label>
+                            <input type="number" id="month" min="1" max="12" name="month" class="form-control" 
+                                   placeholder="Enter month (1-12)" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn-afterlogin">
+                        <i class="fas fa-magic"></i> Get Horoscope
+                    </button>
+                    <button type="reset" class="btn-afterlogin btn-secondary">
+                        <i class="fas fa-undo"></i> Clear
+                    </button>
+                </div>
+            </form>
+        </div>
 
+        <!-- Horoscope Result -->
+        {% if zodiac %}
+        <div class="message-card fade-in-up">
+            <h1 class="heading-afterlogin" style="color: #764ba2;">
+                <i class="fas fa-star"></i> {{ zodiac }}
+            </h1>
+            <div class="alert-afterlogin alert-success">
+                <i class="fas fa-magic"></i> {{ prediction }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
 
-	</head>
-	<body>
-    <style>
-        /******************************************
-/* CSS
-/*******************************************/
+    <!-- Footer -->
+    <footer class="footer-afterlogin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <p style="margin: 0; font-size: 1.1rem;">
+                            <i class="fas fa-copyright"></i> 2023 Developed By Kota.Sreevatsa
+                        </p>
+                        <p style="margin: 10px 0 0 0; opacity: 0.8; font-size: 0.9rem;">
+                            <i class="fas fa-star"></i> AstroPrediction - Your Gateway to the Stars <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-/* Box Model Hack */
-*{
-  box-sizing: border-box;
-}
+    <script>
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
 
-/******************************************
-/* LAYOUT
-/*******************************************/
-body{
-  text-align: center;
-  background: red;
-  color: green;
-}
-
-.birthday{
-text-decoration-color: gray;
-}
-
-.sign{
-  display: none;
-}
-
-
-
-/******************************************
-/* ADDITIONAL STYLES
-/*******************************************/
-
-    </style>
-    <hr><hr>
-<style >
-body, html {
-  height: 100%;
-}
-body {
-  background-image: url("https://www.sohinisastri.com/wp-content/uploads/2021/05/banner.jpg");
-
-    height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-    nav {
-  background-color: #333; /* change the background color to your desired color */
-  overflow: hidden;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-.message-card {
-    background-color: rgba(0, 0, 0, 0.7); /* Background color with some transparency */
-    padding: 10px;
-    margin: 20px;
-    border-radius: 10px; /* Rounded corners for the card */
-}
-nav li {
-  margin: 0;
-}
-
-nav a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
-}
-
-nav a:hover {
-  background-color: #ddd; /* change the hover background color to your desired color */
-  color: black;
-}
-
-</style>
-
-<h3 align="center">ZODIACSIGN</h3>
-<hr><hr>
-<nav>
-    <ul>
-        <li><a href="{% url 'userhome' %}">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-        <li><a href="{% url 'checksign' %}">Check sign</a>&nbsp;&nbsp;</li>
-</li>
-
-        <li><a href="{% url 'horoscope' %}">Horoscope</a>&nbsp;&nbsp;</li>
-        <li><a href="{% url 'userchangepwd' %}">Change Password</a>&nbsp;&nbsp;</li>
-		<li><a href="{% url 'feedback' %}">Feedback</a>&nbsp;&nbsp;</li>
-         <li><a href="{% url 'initiate_payment' %}">Donate</a>&nbsp;&nbsp;</li>
-        <li><a href="{% url 'logout' %}">Logout</a>&nbsp;&nbsp;</li>
-
-         </ul>
-</nav>
-<br><br>
-
-<center>
-    <div class="message-card">
-	<h2 style="color:white"> Enter your birthday. </h2>
-
-<form method="post" action="{% url 'checkhoroscope' %}"  style="color:white" >
-    {% csrf_token %}
-    <table align="center">
-        <tr>
-            <td>
-                <label  style="color:white" >Enter Date</label>
-            </td>
-            <td>
-             <input type="number" id="day" min="1" max="31" name="date"></p></b>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-
-
-
-
-        <tr>
-            <td>
-                <label  style="color:white" >Enter Month</label>
-            </td>
-            <td>
-               <input type="number" id="month" min="1" max="12" name="month" ></p></b>
-            </td>
-
-        </tr>
-
-
-
-
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-
-        <tr>
-
-            <td>
-                <input type="submit" value="Login" class="button-1"/>
-            </td>
-            <td>
-                <input type="reset" value="Clear" class="button-1"/>
-            </td>
-
-        </tr>
-    </table>
-
-</form></div>
-<div class="message-card">
-    <h1>{{zodiac}}</h1><br>
-    <b><p style="color:white">{{prediction}}</p></b>
-</div>
-    </center>
-<script type="text/javascript">
-    (function(d, m){
-        var kommunicateSettings =
-            {"appId":"3a63b4857f5063f8fb95d4f4d442d6ea1","popupWidget":true,"automaticChatOpenOnNavigation":true};
-        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
-        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-        window.kommunicate = m; m._globals = kommunicateSettings;
-    })(document, window.kommunicate || {});
-/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
-</script>
- <script>
-      document.addEventListener("contextmenu", (event) => {
-         event.preventDefault();
-      });
-   </script>
-     <script type="text/javascript">
-      // Disable the browser's back button
-      history.pushState(null, null, location.href);
-      window.onpopstate = function () {
-         history.go(1);
-      };
-   </script>
+        // Disable the browser's back button
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
+</body>
+</html>

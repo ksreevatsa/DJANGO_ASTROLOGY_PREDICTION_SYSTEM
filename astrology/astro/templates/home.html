@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<b><p style="color: white; font-size: 24px;">Hello! Welcome to our website. You can check your zodiac and try our exclusive horoscope prediction feature.</p></b>
+<div class="full-vh-container">
+    <div class="container-modern" style="max-width: 1200px;">
+        <div class="welcome-section fade-in-up">
+            <h1 class="welcome-title">
+                <i class="fas fa-star"></i> Welcome to AstroPrediction
+            </h1>
+            <p class="welcome-subtitle">
+                Discover your cosmic destiny with our exclusive horoscope predictions and zodiac insights. 
+                Unlock the secrets of the stars and explore what the universe has in store for you.
+            </p>
+            
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="/register" class="btn-modern" style="margin: 10px; padding: 15px 30px; font-size: 18px;">
+                    <i class="fas fa-user-plus"></i> Get Started
+                </a>
+                <a href="/login" class="btn-modern btn-secondary" style="margin: 10px; padding: 15px 30px; font-size: 18px;">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            </div>
+        </div>
+        
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

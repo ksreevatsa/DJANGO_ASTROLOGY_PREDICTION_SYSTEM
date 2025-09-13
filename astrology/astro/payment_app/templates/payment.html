@@ -1,42 +1,126 @@
-<!-- payment_app/templates/payment.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Razorpay Payment</title>
+    <title>Donate - AstroPrediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% load static %}{% static 'afterlogin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<style>
-    body {
-        background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190625/ourmid/pngtree-blue-mobile-phone-scan-code-payment-technology-banner-background-image_260854.jpg');
-        background-size: 100% 100%; /* Cover the entire viewport */
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* Keep the background fixed while scrolling */
-    }
-</style>
-
-
-
 <body>
-    <h1>Razorpay Payment Form</h1>
-    <form id="payment-form">
-        {% csrf_token %}
-        <label for="amount">Enter Amount (in INR):</label>
-        <input type="number" id="amount" name="amount" required>
-        <button type="button" id="pay-button">Pay Now</button>
-    </form>
+    <!-- Navigation -->
+    <nav class="navbar-afterlogin">
+        <ul>
+            <li><a href="{% url 'userhome' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'checksign' %}"><i class="fas fa-star"></i> Check Sign</a></li>
+            <li><a href="{% url 'horoscope' %}"><i class="fas fa-moon"></i> Horoscope</a></li>
+            <li><a href="{% url 'userchangepwd' %}"><i class="fas fa-lock"></i> Change Password</a></li>
+            <li><a href="{% url 'feedback' %}"><i class="fas fa-comment"></i> Feedback</a></li>
+            <li><a href="{% url 'initiate_payment' %}"><i class="fas fa-heart"></i> Donate</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-afterlogin">
+        <div class="welcome-afterlogin fade-in-up">
+            <h1 class="welcome-title">
+                <i class="fas fa-heart"></i> Support AstroPrediction
+            </h1>
+            <p class="welcome-subtitle">
+                Help us continue providing quality astrology services by making a donation.
+            </p>
+        </div>
+
+        <!-- Payment Form -->
+        <div class="payment-form fade-in-up">
+            <h1 class="heading-afterlogin">
+                <i class="fas fa-credit-card"></i> Make a Donation
+            </h1>
+            
+            <form id="payment-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="amount" class="form-label">
+                        <i class="fas fa-rupee-sign"></i> Enter Amount (in INR)
+                    </label>
+                    <input type="number" id="amount" name="amount" class="form-control" 
+                           placeholder="Enter amount" min="1" required>
+                </div>
+                
+                <div class="text-center">
+                    <button type="button" id="pay-button" class="btn-afterlogin">
+                        <i class="fas fa-heart"></i> Donate Now
+                    </button>
+                </div>
+            </form>
+            
+            <div class="text-center" style="margin-top: 30px;">
+                <a href="{% url 'userhome' %}" class="btn-afterlogin btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+
+        <!-- Donation Benefits -->
+        <div class="row" style="margin-top: 40px;">
+            <div class="col-md-4">
+                <div class="card-afterlogin text-center">
+                    <i class="fas fa-star" style="font-size: 2.5rem; color: #667eea; margin-bottom: 15px;"></i>
+                    <h4 class="subheading-afterlogin">Support Development</h4>
+                    <p class="text-afterlogin">Help us improve and add new features to our astrology platform.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-afterlogin text-center">
+                    <i class="fas fa-moon" style="font-size: 2.5rem; color: #764ba2; margin-bottom: 15px;"></i>
+                    <h4 class="subheading-afterlogin">Better Predictions</h4>
+                    <p class="text-afterlogin">Your support helps us provide more accurate and detailed horoscope predictions.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-afterlogin text-center">
+                    <i class="fas fa-users" style="font-size: 2.5rem; color: #667eea; margin-bottom: 15px;"></i>
+                    <h4 class="subheading-afterlogin">Community Growth</h4>
+                    <p class="text-afterlogin">Help us reach more people and build a stronger astrology community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-afterlogin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <p style="margin: 0; font-size: 1.1rem;">
+                            <i class="fas fa-copyright"></i> 2023 Developed By Kota.Sreevatsa
+                        </p>
+                        <p style="margin: 10px 0 0 0; opacity: 0.8; font-size: 0.9rem;">
+                            <i class="fas fa-star"></i> AstroPrediction - Your Gateway to the Stars <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
             $("#pay-button").click(function(e) {
-                e.preventDefault(); // Prevent the default form submission
+                e.preventDefault();
 
-                // Get the amount entered by the user
                 const amount = $("#amount").val();
+                
+                if (!amount || amount < 1) {
+                    alert("Please enter a valid amount");
+                    return;
+                }
 
-                // Make an AJAX request to initiate the payment
                 $.ajax({
                     type: "POST",
                     url: "/payment/initiate-payment/",
@@ -46,7 +130,6 @@
                         xhr.setRequestHeader("X-CSRFToken", $("[name=csrfmiddlewaretoken]").val());
                     },
                     success: function(data) {
-                        // Initialize Razorpay Checkout with the received values
                         const options = {
                             key: data.key,
                             amount: data.amount,
@@ -56,12 +139,9 @@
                             description: data.description,
                             image: data.image,
                             handler: function(response) {
-                                // Handle the payment success or failure and redirect accordingly
                                 if (response.razorpay_payment_id) {
-                                    // Payment successful, redirect to the success URL
                                     window.location.href = "/payment/payment-success/";
                                 } else {
-                                    // Payment failed or canceled, redirect to the failure URL
                                     window.location.href = "/payment/payment-failed/";
                                 }
                             },
@@ -77,15 +157,15 @@
                     },
                     error: function(error) {
                         console.error("Error initiating payment:", error);
+                        alert("Error processing payment. Please try again.");
                     }
                 });
             });
         });
+
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
     </script>
 </body>
 </html>
-  <script>
-      document.addEventListener("contextmenu", (event) => {
-         event.preventDefault();
-      });
-   </script>

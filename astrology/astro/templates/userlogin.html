@@ -1,75 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2 align="center" style="color:red">{{message}}</h2><br>
-<h3 align="center" style="color:white"><u>User Login</u></h3><br>
-<center>
-<form method="post" action="{% url 'userlogin' %}"  style="color:white" >
-    {% csrf_token %}
-    <table align="center">
-        <tr>
-            <td>
-                <label  style="color:white" >Enter Username</label>
-            </td>
-            <td>
-                <input type="text" name="uname" required>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-
-
-
-
-        <tr>
-            <td>
-                <label  style="color:white" >Enter Password</label>
-            </td>
-            <td>
-                <input type="password" name="pwd" required>
-            </td>
-
-        </tr>
-
-
-
-
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-            </td>
-        </tr>
-
-
-        <tr>
-
-            <td>
-                <input type="submit" value="Login" class="button-1"/>
-            </td>
-            <td>
-                <input type="reset" value="Clear" class="button-1"/>
-            </td>
-
-        </tr>
-    </table>
-</form>
-    </center>
+<div class="full-vh-container">
+    <div class="card-modern form-card-compact fade-in-up">
+        {% if message %}
+        <div class="alert-modern alert-error text-center">
+            <i class="fas fa-exclamation-triangle"></i> {{ message }}
+        </div>
+        {% endif %}
+        
+        <h2 class="heading-modern">
+            <i class="fas fa-sign-in-alt"></i> User Login
+        </h2>
+        
+        <form method="post" action="{% url 'userlogin' %}" class="form-modern">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input type="text" name="uname" class="form-control" required 
+                       placeholder="Enter your username">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input type="password" name="pwd" class="form-control" required 
+                       placeholder="Enter your password">
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn-modern">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button type="reset" class="btn-modern btn-secondary">
+                    <i class="fas fa-undo"></i> Clear
+                </button>
+            </div>
+        </form>
+        
+        <div class="text-center" style="margin-top: 20px;">
+            <p class="text-modern">
+                Don't have an account? 
+                <a href="/register" class="btn-modern" style="padding: 8px 16px; font-size: 14px;">
+                    <i class="fas fa-user-plus"></i> Register Here
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
 {% endblock %}

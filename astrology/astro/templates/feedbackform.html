@@ -2,123 +2,140 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AstroPrediction</title>
-    <style>
-        body, html {
-            height: 100%;
-        }
-        body {
-            background-image: url("https://www.sohinisastri.com/wp-content/uploads/2021/05/banner.jpg");
-            height: 100%;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        nav {
-            background-color: #333;
-            overflow: hidden;
-        }
-        nav ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            display: flex;
-            justify-content: center;
-        }
-        nav li {
-            margin: 0;
-        }
-        nav a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .container {
-            width: 50%;
-            margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        h1 {
-            color: green;
-            text-align: center;
-        }
-        form {
-            color: blue;
-        }
-        button {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #555;
-        }
-    </style>
+    <title>Feedback - AstroPrediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% load static %}{% static 'afterlogin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
-    <title>
-        {% block 'title' %}
-        Main Home
-        {% endblock %}
-    </title>
-
-    <h3 align="center" style="color:white">ASTROLOGY PREDICTION SYSTEM</h3>
-    <hr><hr>
-    <nav>
+    <!-- Navigation -->
+    <nav class="navbar-afterlogin">
         <ul>
-            <li><a href="{% url 'userhome' %}">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
-            <li><a href="{% url 'checksign' %}">Check sign</a>&nbsp;&nbsp;</li>
-            <li><a href="{% url 'horoscope' %}">Horoscope</a>&nbsp;&nbsp;</li>
-              <li><a href="{% url 'userchangepwd' %}">Change Password</a>&nbsp;&nbsp;</li>
-            <li><a href="{% url 'feedback' %}">Feedback</a>&nbsp;&nbsp;</li>
-             <li><a href="{% url 'initiate_payment' %}">Donate</a>&nbsp;&nbsp;</li>
-            <li><a href="{% url 'logout' %}">Logout</a>&nbsp;&nbsp;</li>
+            <li><a href="{% url 'userhome' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'checksign' %}"><i class="fas fa-star"></i> Check Sign</a></li>
+            <li><a href="{% url 'horoscope' %}"><i class="fas fa-moon"></i> Horoscope</a></li>
+            <li><a href="{% url 'userchangepwd' %}"><i class="fas fa-lock"></i> Change Password</a></li>
+            <li><a href="{% url 'feedback' %}"><i class="fas fa-comment"></i> Feedback</a></li>
+            <li><a href="{% url 'initiate_payment' %}"><i class="fas fa-heart"></i> Donate</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </nav>
-    <br><br>
-    <h2 align="center" style="color:blue">{{msg}}</h2><br>
-    <div class="container">
-        <h1><center>Feedback Form</center></h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <center><button type="submit">Submit</button></center>
-        </form>
+
+    <!-- Main Content -->
+    <div class="container-afterlogin">
+        <div class="welcome-afterlogin fade-in-up">
+            <h1 class="welcome-title">
+                <i class="fas fa-comment"></i> Feedback Form
+            </h1>
+            <p class="welcome-subtitle">
+                Share your experience and help us improve our astrology services.
+            </p>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="message-card fade-in-up">
+            {% if msg %}
+            <div class="alert-afterlogin alert-success text-center">
+                <i class="fas fa-check-circle"></i> {{ msg }}
+            </div>
+            {% endif %}
+            
+            <h2 class="heading-afterlogin">
+                <i class="fas fa-star"></i> Your Feedback Matters
+            </h2>
+            
+            <form method="post" class="form-afterlogin">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-user"></i> Customer Name
+                    </label>
+                    {{ form.customer_name }}
+                    {% if form.customer_name.errors %}
+                        <div class="errorlist">{{ form.customer_name.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="errorlist">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-comment-alt"></i> Feedback
+                    </label>
+                    {{ form.feedback }}
+                    {% if form.feedback.errors %}
+                        <div class="errorlist">{{ form.feedback.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-smile"></i> Are you happy with our service?
+                    </label>
+                    <div style="margin-top: 10px;">
+                        {{ form.happy }}
+                        <span style="margin-left: 10px; color: #667eea; font-weight: 600;">Yes, I'm happy!</span>
+                    </div>
+                    {% if form.happy.errors %}
+                        <div class="errorlist">{{ form.happy.errors }}</div>
+                    {% endif %}
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn-afterlogin">
+                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                    </button>
+                    <button type="reset" class="btn-afterlogin btn-secondary">
+                        <i class="fas fa-undo"></i> Clear
+                    </button>
+                </div>
+            </form>
+            
+            <div class="text-center" style="margin-top: 20px;">
+                <a href="{% url 'userhome' %}" class="btn-afterlogin btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer-afterlogin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <p style="margin: 0; font-size: 1.1rem;">
+                            <i class="fas fa-copyright"></i> 2023 Developed By Kota.Sreevatsa
+                        </p>
+                        <p style="margin: 10px 0 0 0; opacity: 0.8; font-size: 0.9rem;">
+                            <i class="fas fa-star"></i> AstroPrediction - Your Gateway to the Stars <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
+
+        // Disable the browser's back button
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
 </body>
 </html>
-<script type="text/javascript">
-    (function(d, m){
-        var kommunicateSettings =
-            {"appId":"3a63b4857f5063f8fb95d4f4d442d6ea1","popupWidget":true,"automaticChatOpenOnNavigation":true};
-        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
-        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-        window.kommunicate = m; m._globals = kommunicateSettings;
-    })(document, window.kommunicate || {});
-/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
-</script>
- <script>
-      document.addEventListener("contextmenu", (event) => {
-         event.preventDefault();
-      });
-   </script>
- <script type="text/javascript">
-      // Disable the browser's back button
-      history.pushState(null, null, location.href);
-      window.onpopstate = function () {
-         history.go(1);
-      };
-   </script>

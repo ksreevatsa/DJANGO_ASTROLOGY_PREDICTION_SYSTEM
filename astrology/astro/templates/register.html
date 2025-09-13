@@ -1,19 +1,146 @@
 {% extends 'base.html' %}
 {% block content %}
-<center>
-<h2 align="center" style="color:red">{{msg}}</h2><br>
-<body>
-    <div class="container" >
-        <br>
-        <h1 style="color:white">Registration Page</h1><br>
-        <form method="post" style="color:white" >
+<div class="full-vh-container">
+    <div class="card-modern form-card-compact fade-in-up">
+        {% if msg %}
+        <div class="alert-modern alert-error text-center">
+            <i class="fas fa-exclamation-triangle"></i> {{ msg }}
+        </div>
+        {% endif %}
+        
+        <h2 class="heading-modern">
+            <i class="fas fa-user-plus"></i> Registration
+        </h2>
+        
+        <form method="post" class="form-modern">
             {% csrf_token %}
-            {{ form.as_p }}
-             <input type="submit" value="Submit" >
-             <input type="reset" value="Clear" >
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-user"></i> Full Name
+                </label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <div class="errorlist">{{ form.name.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="errorlist">{{ form.username.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="errorlist">{{ form.email.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div class="errorlist">{{ form.password.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-phone"></i> Phone Number
+                </label>
+                {{ form.contact }}
+                {% if form.contact.errors %}
+                    <div class="errorlist">{{ form.contact.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-venus-mars"></i> Gender
+                </label>
+                {{ form.gender }}
+                {% if form.gender.errors %}
+                    <div class="errorlist">{{ form.gender.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn-modern">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+                <button type="reset" class="btn-modern btn-secondary">
+                    <i class="fas fa-undo"></i> Clear
+                </button>
+            </div>
         </form>
+        
+        <div class="text-center" style="margin-top: 20px;">
+            <p class="text-modern">
+                Already have an account? 
+                <a href="/login" class="btn-modern" style="padding: 8px 16px; font-size: 14px;">
+                    <i class="fas fa-sign-in-alt"></i> Login Here
+                </a>
+            </p>
+        </div>
     </div>
-</body>
-    </center>
+</div>
 
+<style>
+/* Style Django form fields */
+.form-modern input[type="text"],
+.form-modern input[type="email"],
+.form-modern input[type="password"],
+.form-modern input[type="date"],
+.form-modern select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-modern input[type="text"]:focus,
+.form-modern input[type="email"]:focus,
+.form-modern input[type="password"]:focus,
+.form-modern input[type="date"]:focus,
+.form-modern select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-modern ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.form-modern li {
+    color: #e74c3c;
+    font-size: 14px;
+    margin: 2px 0;
+}
+
+.form-modern .errorlist {
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid #e74c3c;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px 0;
+}
+</style>
 {% endblock %}

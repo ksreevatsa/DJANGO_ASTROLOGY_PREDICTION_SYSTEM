@@ -1,28 +1,122 @@
-<!-- payment_app/templates/payment_failed.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Payment Failed</title>
+    <title>Payment Failed - AstroPrediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% load static %}{% static 'afterlogin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
-<style>
-    body {
-        background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190625/ourmid/pngtree-blue-mobile-phone-scan-code-payment-technology-banner-background-image_260854.jpg');
-        background-size: 100% 100%; /* Cover the entire viewport */
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* Keep the background fixed while scrolling */
-    }
-</style>
-
 <body>
+    <!-- Navigation -->
+    <nav class="navbar-afterlogin">
+        <ul>
+            <li><a href="{% url 'userhome' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'checksign' %}"><i class="fas fa-star"></i> Check Sign</a></li>
+            <li><a href="{% url 'horoscope' %}"><i class="fas fa-moon"></i> Horoscope</a></li>
+            <li><a href="{% url 'userchangepwd' %}"><i class="fas fa-lock"></i> Change Password</a></li>
+            <li><a href="{% url 'feedback' %}"><i class="fas fa-comment"></i> Feedback</a></li>
+            <li><a href="{% url 'initiate_payment' %}"><i class="fas fa-heart"></i> Donate</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
 
-    <h1>Payment Failed</h1>
-    <p>Your payment could not be processed. Please try again later.</p>
+    <!-- Main Content -->
+    <div class="container-afterlogin">
+        <div class="welcome-afterlogin fade-in-up">
+            <h1 class="welcome-title">
+                <i class="fas fa-exclamation-triangle"></i> Payment Failed
+            </h1>
+            <p class="welcome-subtitle">
+                We encountered an issue processing your donation. Please try again.
+            </p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="message-card fade-in-up">
+            <div class="text-center">
+                <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px auto; box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);">
+                    <i class="fas fa-times" style="font-size: 3rem; color: white;"></i>
+                </div>
+                
+                <h2 class="heading-afterlogin" style="color: #e74c3c;">
+                    <i class="fas fa-heart-broken"></i> Donation Failed
+                </h2>
+                
+                <div class="alert-afterlogin alert-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p style="margin: 0; font-size: 1.2rem; line-height: 1.6;">
+                        Your payment could not be processed at this time. This could be due to various reasons such as network issues, insufficient funds, or payment gateway problems.
+                    </p>
+                </div>
+                
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fas fa-wifi" style="font-size: 2rem; color: #667eea; margin-bottom: 10px;"></i>
+                            <h5 style="color: #667eea; font-weight: 600;">Check Connection</h5>
+                            <p style="color: #555; font-size: 0.9rem;">Ensure stable internet connection</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fas fa-credit-card" style="font-size: 2rem; color: #764ba2; margin-bottom: 10px;"></i>
+                            <h5 style="color: #764ba2; font-weight: 600;">Verify Details</h5>
+                            <p style="color: #555; font-size: 0.9rem;">Check payment method details</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fas fa-redo" style="font-size: 2rem; color: #667eea; margin-bottom: 10px;"></i>
+                            <h5 style="color: #667eea; font-weight: 600;">Try Again</h5>
+                            <p style="color: #555; font-size: 0.9rem;">Retry the payment process</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 40px;">
+                    <a href="{% url 'initiate_payment' %}" class="btn-afterlogin">
+                        <i class="fas fa-redo"></i> Try Again
+                    </a>
+                    <a href="{% url 'userhome' %}" class="btn-afterlogin btn-secondary">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: rgba(102, 126, 234, 0.1); border-radius: 10px; border-left: 4px solid #667eea;">
+                    <h5 style="color: #667eea; margin-bottom: 10px;">
+                        <i class="fas fa-info-circle"></i> Need Help?
+                    </h5>
+                    <p style="color: #555; margin: 0; font-size: 0.95rem;">
+                        If you continue to experience issues, please contact our support team or try using a different payment method.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-afterlogin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <p style="margin: 0; font-size: 1.1rem;">
+                            <i class="fas fa-copyright"></i> 2023 Developed By Kota.Sreevatsa
+                        </p>
+                        <p style="margin: 10px 0 0 0; opacity: 0.8; font-size: 0.9rem;">
+                            <i class="fas fa-star"></i> AstroPrediction - Your Gateway to the Stars <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
+    </script>
 </body>
 </html>
-  <script>
-      document.addEventListener("contextmenu", (event) => {
-         event.preventDefault();
-      });
-   </script>

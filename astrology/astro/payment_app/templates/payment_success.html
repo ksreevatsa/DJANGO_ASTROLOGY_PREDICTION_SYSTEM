@@ -2,24 +2,112 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Payment Success</title>
-    <style>
-    body {
-        background-image: url('https://png.pngtree.com/thumb_back/fh260/back_our/20190625/ourmid/pngtree-blue-mobile-phone-scan-code-payment-technology-banner-background-image_260854.jpg');
-        background-size: 100% 100%; /* Cover the entire viewport */
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* Keep the background fixed while scrolling */
-    }
-</style>
-
+    <title>Payment Successful - AstroPrediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% load static %}{% static 'afterlogin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 </head>
 <body>
-    <h1>Payment Successful</h1>
-    <p>Your payment has been successfully processed.</p>
+    <!-- Navigation -->
+    <nav class="navbar-afterlogin">
+        <ul>
+            <li><a href="{% url 'userhome' %}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'checksign' %}"><i class="fas fa-star"></i> Check Sign</a></li>
+            <li><a href="{% url 'horoscope' %}"><i class="fas fa-moon"></i> Horoscope</a></li>
+            <li><a href="{% url 'userchangepwd' %}"><i class="fas fa-lock"></i> Change Password</a></li>
+            <li><a href="{% url 'feedback' %}"><i class="fas fa-comment"></i> Feedback</a></li>
+            <li><a href="{% url 'initiate_payment' %}"><i class="fas fa-heart"></i> Donate</a></li>
+            <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-afterlogin">
+        <div class="welcome-afterlogin fade-in-up">
+            <h1 class="welcome-title">
+                <i class="fas fa-check-circle"></i> Payment Successful!
+            </h1>
+            <p class="welcome-subtitle">
+                Thank you for your generous donation to AstroPrediction.
+            </p>
+        </div>
+
+        <!-- Success Message -->
+        <div class="message-card fade-in-up">
+            <div class="text-center">
+                <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #27ae60, #2ecc71); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px auto; box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);">
+                    <i class="fas fa-check" style="font-size: 3rem; color: white;"></i>
+                </div>
+                
+                <h2 class="heading-afterlogin" style="color: #27ae60;">
+                    <i class="fas fa-heart"></i> Donation Successful
+                </h2>
+                
+                <div class="alert-afterlogin alert-success">
+                    <i class="fas fa-star"></i>
+                    <p style="margin: 0; font-size: 1.2rem; line-height: 1.6;">
+                        Your payment has been successfully processed! Thank you for supporting AstroPrediction and helping us continue to provide quality astrology services.
+                    </p>
+                </div>
+                
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fas fa-gift" style="font-size: 2rem; color: #667eea; margin-bottom: 10px;"></i>
+                            <h5 style="color: #667eea; font-weight: 600;">Your Support</h5>
+                            <p style="color: #555; font-size: 0.9rem;">Helps us improve our platform</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fas fa-star" style="font-size: 2rem; color: #764ba2; margin-bottom: 10px;"></i>
+                            <h5 style="color: #764ba2; font-weight: 600;">Better Predictions</h5>
+                            <p style="color: #555; font-size: 0.9rem;">Enhances our astrology services</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fas fa-users" style="font-size: 2rem; color: #667eea; margin-bottom: 10px;"></i>
+                            <h5 style="color: #667eea; font-weight: 600;">Community Growth</h5>
+                            <p style="color: #555; font-size: 0.9rem;">Expands our astrology community</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center" style="margin-top: 40px;">
+                    <a href="{% url 'userhome' %}" class="btn-afterlogin">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                    <a href="{% url 'initiate_payment' %}" class="btn-afterlogin btn-secondary">
+                        <i class="fas fa-heart"></i> Donate Again
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-afterlogin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <p style="margin: 0; font-size: 1.1rem;">
+                            <i class="fas fa-copyright"></i> 2023 Developed By Kota.Sreevatsa
+                        </p>
+                        <p style="margin: 10px 0 0 0; opacity: 0.8; font-size: 0.9rem;">
+                            <i class="fas fa-star"></i> AstroPrediction - Your Gateway to the Stars <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+        });
+    </script>
 </body>
 </html>
-  <script>
-      document.addEventListener("contextmenu", (event) => {
-         event.preventDefault();
-      });
-   </script>
